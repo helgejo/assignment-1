@@ -19,11 +19,11 @@ def get_file():
         filename = sys.argv[1]
 
     try:
-        fin = open(filename, "r")
+        fin = open(filename, "rU")
     except IOError:
         print "Error: The file '%s' was not found on this system." % filename
         sys.exit(0)
-
+    print fin
     return fin
 
 def run_test(fin):
@@ -36,11 +36,13 @@ def run_test(fin):
     """
     # Create a list of all the lines in the data file
     lines = [line.strip() for line in fin.readlines()]
-
+    print lines
     # Remove the attributes from the list of lines and create a list of
     # the attributes.
     lines.reverse()
-    attributes = [attr.strip() for attr in lines.pop().split(",")]
+    print lines
+    attributes = [attr.strip() for attr in lines.pop().split(";")]
+    print attributes[-1]
     target_attr = attributes[-1]
     lines.reverse()
 
@@ -48,11 +50,11 @@ def run_test(fin):
     data = []
     for line in lines:
         data.append(dict(zip(attributes,
-                             [datum.strip() for datum in line.split(",")])))
+                             [datum.strip() for datum in line.split(";")])))
         
     # Copy the data list into the examples list for testing
     examples = data[:]
-    
+    print examples
     # Create the decision tree
     tree = create_decision_tree(data, attributes, target_attr, gain)
 
