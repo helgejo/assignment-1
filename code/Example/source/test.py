@@ -45,13 +45,15 @@ def run_test(fin):
     print attributes[-1]
     target_attr = attributes[-1]
     lines.reverse()
+    print attributes
+    print target_attr
 
     # Create a list of the data in the data file
     data = []
     for line in lines:
-        data.append(dict(zip(attributes,
-                             [datum.strip() for datum in line.split(";")])))
-        
+        data.append(dict(zip(attributes,[datum.strip() for datum in line.split(";")])))
+
+    print data
     # Copy the data list into the examples list for testing
     examples = data[:]
     print examples
