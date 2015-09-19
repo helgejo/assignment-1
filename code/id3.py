@@ -1,6 +1,9 @@
 """
 This module contains the functions for calculating the information gain of a
 dataset as defined by the ID3 (Information Theoretic) heuristic.
+
+This file has been adopted from:
+http://www.onlamp.com/pub/a/python/2006/02/09/ai_decision_trees.html
 """
 
 import math
@@ -33,12 +36,12 @@ def gain(data, attr, target_attr):
     val_freq = {}
     subset_entropy = 0.0
 
-    # Calculate the frequency of each of the values in the target attribute
+    # Calculate the frequency of each of the values in attr
     for record in data:
-        if (val_freq.has_key(record[attr])):
-            val_freq[record[attr]] += 1.0
-        else:
-            val_freq[record[attr]] = 1.0
+         if (val_freq.has_key(record[attr])):
+             val_freq[record[attr]] += 1.0
+         else:
+             val_freq[record[attr]] = 1.0
 
     # Calculate the sum of the entropy for each subset of records weighted
     # by their probability of occuring in the training set.
@@ -49,5 +52,6 @@ def gain(data, attr, target_attr):
 
     # Subtract the entropy of the chosen attribute from the entropy of the
     # whole data set with respect to the target attribute (and return it)
+
     return (entropy(data, target_attr) - subset_entropy)
             
